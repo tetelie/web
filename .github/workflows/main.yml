@@ -15,6 +15,18 @@ jobs:
           fetch-depth: 0
           ref: main
 
+      - name: Préparer les fichiers
+        run: |
+          # Créer le répertoire nécessaire
+          mkdir -p /var/www/html/deletang/public/elie
+          # Copier les fichiers du dépôt dans le répertoire cible
+          cp -r $GITHUB_WORKSPACE/* /var/www/html/deletang/public/elie/
+
+      - name: Débogage - Lister les fichiers
+        run: |
+          echo "Lister le répertoire /var/www/html/deletang/public/elie"
+          ls -al /var/www/html/deletang/public/elie
+
       - name: Force SFTP Deploy
         uses: milanmk/actions-file-deployer@master
         with:
@@ -22,6 +34,6 @@ jobs:
           remote-host: ${{ secrets.SFTP_HOST }}
           remote-user: ${{ secrets.SFTP_USER }}
           remote-password: ${{ secrets.SFTP_PASSWORD }}
-          local-path: ../../var/www/html/deletang/public/
+          local-path: /var/www/html/deletang/public/elie/
           remote-path: /elie/
           remote-port: 22
