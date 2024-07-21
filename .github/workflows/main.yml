@@ -1,0 +1,27 @@
+name: Publish Website on DEV
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  SFTP-Deploy-Action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Force SFTP Deploy
+        uses: milanmk/actions-file-deployer@master
+        with:
+          remote-protocol: sftp
+          remote-host: ${{ secrets.SFTP_HOST }}
+          remote-user: ${{ secrets.SFTP_USER }}
+          remote-password: ${{ secrets.SFTP_PASSWORD }}
+          local-path: /var/www/html/deletang/public/elie
+          remote-path: /${{ secrets.SFTP_USER }}/
+          remote-port: 22
