@@ -22,6 +22,6 @@ jobs:
           remote-host: ${{ secrets.SFTP_HOST }}
           remote-user: ${{ secrets.SFTP_USER }}
           remote-password: ${{ secrets.SFTP_PASSWORD }}
-          local-path: /var/www/html/deletang/public/elie
+          local-path: /var/www/html/deletang/public/elie/
           remote-path: /${{ secrets.SFTP_USER }}/
           remote-port: 22
